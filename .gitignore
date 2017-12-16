@@ -99,3 +99,9 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# version with token/channel info
+binbash.secure.py
+
+# live testing file
+bashes/testing.txt
