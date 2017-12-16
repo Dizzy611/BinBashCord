@@ -25,12 +25,20 @@ import sys
 import re
 from random import choice, randint
 
+# Removed due to discord flood protection. Probably not needed anymore anyway.
+#
+#def slicestring(input):
+#	if len(input) < 1994:
+#		return [input]
+#	else:
+#		return list(filter(lambda x: x != '', re.split("(.{1,1994} )", input+" ")))
+#
+
 def slicestring(input):
-	if len(input) < 2000:
+	if len(input) < 1994:
 		return [input]
 	else:
-		return filter(lambda x: x != '', re.split("(.{1,2000} )", input+" "))
-
+		return [input[0:1994]]
 
 client = discord.Client()
 
@@ -75,9 +83,9 @@ async def on_message(message):
 				for tmpline in slicelist:
 					await client.send_message(dest, tmpline)
 		except IOError as e:
-			await client.send_message(dest, 'Sorry, *' + recom.group(1) + 'bash* is not a valid bash file, or another error occurred: IOError #' + e.errno + ' ' + e)
+			await client.send_message(dest, 'Sorry, *' + recom.group(1) + 'bash* is not a valid bash file, or another error occurred: IOError #' + str(e.errno) + ' ' + str(e))
 	if (command == "!addquote") and (len(splitmsg) >= 3) and (re.match("^[a-zA-Z0-9]+$", splitmsg[1]) != None):
-		if (dest.is_private == False) and (RESTRICTADD == True): # Can't check roles on a private message.
+		if (dest.is_private == True) and (RESTRICTADD == True): # Can't check roles on a private message.
 			await client.send_message(dest, 'Sorry, you are not authorized to add quotes over PM.')
 			return
 		if RESTRICTADD == True: 
@@ -94,7 +102,7 @@ async def on_message(message):
 			output.close()
 			await client.send_message(dest, 'Quote successfully added to ' + splitmsg[1] + "bash.")
 		except IOError as e:
-			await client.send_message(dest, 'IOError adding quote. Is *' + splitmsg[1] + 'bash* a valid bash file? Ask ' + MAINTAINER + '. IOError #' + e.errno + ' ' + e)			
+			await client.send_message(dest, 'IOError adding quote. Is *' + splitmsg[1] + 'bash* a valid bash file? Ask ' + MAINTAINER + '. IOError #' + str(e.errno) + ' ' + str(e))
 	elif command == "!bashes":
 		liststring = " ".join(os.listdir("bashes/"))
 		liststring = re.sub(".txt", "", liststring)
