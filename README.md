@@ -1,7 +1,7 @@
 # BinBashCord
 BinBash for the Discord age
 
-**BinBash** is Discord (formerly IRC) quote bot specializing in seperate textual quote files 
+**BinBash** is a Discord (formerly IRC) quote bot specializing in seperate textual quote files 
 for different purposes. In its original incarnation on *irc.slashnet.org*
 channel *#mzx*, it replaced !<nick>bash scripts that were used to chronicle funny 
 quotes from mostly former community members.
